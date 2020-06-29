@@ -38,3 +38,23 @@ Using 32 node it takes 334.9031709 seconds
 Using 64 node it takes 310.3383427 seconds
 Using 128 node it takes 306.0164657 seconds
 
+Checking the integers from 2 to 65536 for primes
+Using 1 node it takes 0.1210515 seconds
+Using 2 node it takes 0.0734439 seconds
+Using 4 node it takes 0.05246079999999999 seconds
+Using 8 node it takes 0.062330399999999994 seconds
+Using 16 node it takes 0.2026871 seconds
+Using 32 node it takes 0.3356857999999998 seconds
+Using 64 node it takes 0.3466586999999999 seconds
+Using 128 node it takes 0.5454560000000006 seconds
+
+Checking the integers from 2 to 2 ** 16 = 65536 for primes
+Using 1 node it takes 0.12137819999999999 seconds
+Using 2 node it takes 0.0716569 seconds
+Using 4 node it takes 0.04514859999999999 seconds
+Using 8 node it takes 0.03593529999999999 seconds
+Using 16 node it takes 0.043733400000000006 seconds
+Using 32 node it takes 0.050754800000000044 seconds
+Using 64 node it takes 0.7429175999999997 seconds
+Using 128 node it takes 0.6756390000000003 seconds
+
