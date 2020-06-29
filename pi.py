@@ -30,17 +30,18 @@ results = []
 n = 16
 MAXTOTEST = 2 ** n 
 
-for p in range(2, MAXTOTEST):
+for p in range(0, MAXTOTEST):
 	if isPrimeTrialDiv(p) == True:
 		results.append(p)
 
 primesfound = len(results)
-print(f'Primes found: {primesfound}')
 		
 end = time.perf_counter()
 totaltime = end - start
 		
 print('*' * 50)
-print(f'Checking the integers from 2 to 2 ** {n} = {2 ** n} for primes\n')
+print(f'Checking the integers from 2 to 2 ** {n} - 1 = {2 ** n - 1} for primes.')
+print(f'We found {primesfound} primes')
 print(f'The process takes {totaltime} seconds.')
 print('*' * 50)
+ 

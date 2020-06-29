@@ -58,3 +58,7 @@ Using 32 node it takes 0.050754800000000044 seconds
 Using 64 node it takes 0.7429175999999997 seconds
 Using 128 node it takes 0.6756390000000003 seconds
 
+Using 16 node it takes 0.04183020000000001 seconds
+Using 16 node it takes 0.0498702 seconds
+Using 16 node it takes 0.04631450000000001 seconds
+Using 16 nodes it takes 0.04265370000000002 seconds

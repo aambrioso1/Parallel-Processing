@@ -100,7 +100,7 @@ while numstested < MAXTOTEST:
 		with open('mpi_pi_out.txt','a') as f:
 			if totalnodes == 1:
 				f.write(f'Checking the integers from 2 to 2 ** {n} = {2 ** n} for primes\n')
-			f.write(f'Using {totalnodes} node it takes {totaltime} seconds\n')
+			f.write(f'Using {totalnodes} nodes it takes {totaltime} seconds\n')
 			if totalnodes == 128:
 				f.write('\n')
 
