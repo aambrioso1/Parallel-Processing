@@ -62,3 +62,5 @@ Using 16 node it takes 0.04183020000000001 seconds
 Using 16 node it takes 0.0498702 seconds
 Using 16 node it takes 0.04631450000000001 seconds
 Using 16 nodes it takes 0.04265370000000002 seconds
+Using 16 nodes it takes 0.2557674000000001 seconds
+Using 16 nodes it takes 0.1931758 seconds

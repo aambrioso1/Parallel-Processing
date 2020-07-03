@@ -97,13 +97,16 @@ while numstested < MAXTOTEST:
 		end = time.perf_counter()
 		totaltime = end - start
 		
-		with open('mpi_pi_out.txt','a') as f:
+		with open('mpi_csv_out.txt','a') as f:
+			f.write(f'{totalnodes},{totaltime}\n')
+			"""
+			# Verbal output
 			if totalnodes == 1:
 				f.write(f'Checking the integers from 2 to 2 ** {n} = {2 ** n} for primes\n')
 			f.write(f'Using {totalnodes} nodes it takes {totaltime} seconds\n')
 			if totalnodes == 128:
 				f.write('\n')
-
+			"""
 
 		print('*' * 50)
 		print(f'With {totalnodes} nodes the process takes {totaltime} seconds.')
