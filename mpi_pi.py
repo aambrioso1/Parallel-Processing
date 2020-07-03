@@ -42,11 +42,8 @@ def isPrimeTrialDiv(num):
 mylist = []
 totalnodes_list = []
 totaltime_list = []
-numstested = 0
 
-
-
-n = 16
+n = 22
 MAXTOTEST = 2 ** n 
 
 primesfound = 0
@@ -61,53 +58,57 @@ BATCHSZ = MAXTOTEST // totalnodes
 if rank==0:
 	print('The total number of nodes is ' + str(totalnodes))
 
-while numstested < MAXTOTEST:
-	if rank==0:
-		mylist = []
-		for i in range(0,totalnodes):
-			innerlist = []
-			innerlist.append(primei * BATCHSZ)
-			innerlist.append(((primei+1) * BATCHSZ)-1)
-			mylist.append(innerlist)
-			# print(f'innerlist = {innerlist}')
-			primei = primei + 1
-	
-	# print(f'mylist = {mylist}')
-	
-	me = comm.scatter(mylist, root=0)
-	numstested = numstested + (totalnodes * BATCHSZ)
-	results = []
-	
-	# print(f'me[0], me[1] = {me[0]}, {me[1]}')
-	
-	for p in range(me[0], me[1]+1):
-		if isPrimeTrialDiv(p) == True:
-			results.append(p)
+#  Need to explain the use of this while loop.   I believe that it works like this.   Each batch is sent out to the nodes at random.
+#  As each node completes its batch, numstested is incremented.
 
-	# print(f'My rank is {rank} and I am processing {me[0]} to {me[1]}')
+if rank==0:
+	mylist = []
+	for i in range(0,totalnodes):
+		innerlist = []
+		innerlist.append(primei * BATCHSZ)
+		innerlist.append(((primei+1) * BATCHSZ)-1)
+		mylist.append(innerlist)
+		# print(f'innerlist = {innerlist}')
+		primei = primei + 1
 
+# print(f'mylist = {mylist}')
+#  The scatter sends my list to the various nodes
+me = comm.scatter(mylist, root=0)
 
-	mylist = comm.gather(results)
+results = []
+
+# print(f'me[0], me[1] = {me[0]}, {me[1]}')
+
+for p in range(me[0], me[1]+1):
+	if isPrimeTrialDiv(p) == True:
+		results.append(p)
+
+# print(f'My rank is {rank} and I am processing {me[0]} to {me[1]}')
+
+# The gather command brings together the compututations done by each node.
+mylist = comm.gather(results)
+
+if rank==0:
+	for inn in mylist:
+		primesfound = primesfound + len(inn)
+	print(f'Primes found so far: {primesfound}')
+	# print(f'My rank is {rank} and mylist is {mylist} with length {len(mylist)}')
+	end = time.perf_counter()
+	totaltime = end - start
 	
-	if rank==0:
-		for inn in mylist:
-			primesfound = primesfound + len(inn)
-		print(f'Primes found so far: {primesfound}')
-		# print(f'My rank is {rank} and mylist is {mylist} with length {len(mylist)}')
-		end = time.perf_counter()
-		totaltime = end - start
+	with open('mpi_csv_out.txt','a') as f:
+		f.write(f'{totalnodes},{totaltime}\n')
 		
-		with open('mpi_csv_out.txt','a') as f:
-			f.write(f'{totalnodes},{totaltime}\n')
-			"""
-			# Verbal output
-			if totalnodes == 1:
-				f.write(f'Checking the integers from 2 to 2 ** {n} = {2 ** n} for primes\n')
-			f.write(f'Using {totalnodes} nodes it takes {totaltime} seconds\n')
-			if totalnodes == 128:
-				f.write('\n')
-			"""
+		# Verbal output
+		"""
+		if totalnodes == 1:
+			f.write(f'Checking the integers from 2 to 2 ** {n} - 1 = {2 ** n - 1}  for primes\n')
+		f.write(f'Using {totalnodes} nodes it takes {totaltime} seconds\n')
+		if totalnodes == 128:
+			f.write('\n')
+		"""
 
-		print('*' * 50)
-		print(f'With {totalnodes} nodes the process takes {totaltime} seconds.')
-		print('*' * 50)
+	# print('*' * 50)
+	print(f'Checking the integers from 2 to 2 ** {n} - 1 = {2 ** n - 1}  for primes\n')
+	print(f'With {totalnodes} nodes the process takes {totaltime} seconds.\n')
+	# print('*' * 50)

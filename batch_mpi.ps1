@@ -6,3 +6,4 @@ mpiexec -n 4 python mpi_pi.py
 mpiexec -n 8 python mpi_pi.py
 mpiexec -n 16 python mpi_pi.py
 mpiexec -n 32 python mpi_pi.py
+

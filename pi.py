@@ -26,15 +26,11 @@ def isPrimeTrialDiv(num):
 
     return True
 
-
-
-
-
 y_list = []
 
-exp = 20
+exp = 22
 
-for n in range(exp):
+for n in range(exp+1):
 	MAXTOTEST = 2 ** n
 	cumulative_time = []
 
@@ -56,13 +52,14 @@ for n in range(exp):
 		cumulative_time.append(totaltime)
 	average_time = sum(cumulative_time) / trials
 	y_list.append(average_time)
-	print('*' * 50)
+	
+	
+	#print('*' * 50)
 	print(f'Checking the integers from 2 to 2 ** {n} - 1 = {2 ** n - 1} for primes.')
 	print(f'We found {primesfound} primes')
-	print(f'For {trials} trials the process takes an average of {average_time} seconds.')
-	print('*' * 50)
+	print(f'For {trials} trials the process takes an average of {average_time} seconds.\n')
+	# print('*' * 50)
+	
 
-
-x_list = [i for i in range(exp)]
+x_list = [i for i in range(exp+1)]
 plot.pl(x_list, y_list)
-	 

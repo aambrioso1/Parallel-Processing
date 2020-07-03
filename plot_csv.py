@@ -4,8 +4,6 @@ Takes a text file of lines of pairs of numbers ss
 
 import plot
 
-
-
 with open('mpi_csv_out.txt', 'r') as reader:
 	# Read and print the entire file line by line
 	x_list = []
